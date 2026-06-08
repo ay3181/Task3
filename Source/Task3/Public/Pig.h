@@ -18,6 +18,7 @@ public:
 
 	UMaterial* PigColor;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Number|Speed")
 	float RotateSpeed;
 
 protected:

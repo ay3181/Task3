@@ -17,8 +17,12 @@ public:
 	USceneComponent* SceneRoot;
 	USkeletalMeshComponent* MageSkeletalMeshComp;
 
-	FVector StartLocation, CurrentLocation;
-	float MoveSpeed, MaxRange;
+	FVector StartLocation, CurrentLocation, ForwardVector;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Number|Speed")
+	float MoveSpeed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Number|Range")
+	float MaxRange;
 
 protected:
 	virtual void BeginPlay() override;

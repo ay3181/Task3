@@ -16,8 +16,8 @@ AMage::AMage()
 	if (MageSkeletalMesh.Succeeded())
 	{
 		MageSkeletalMeshComp->SetSkeletalMesh(MageSkeletalMesh.Object);
+		MageSkeletalMeshComp->SetRelativeRotation(FRotator(0.0f, -90.0f, 90.0f));
 	}
-	SetActorRotation(FRotator(0, 0, 90));
 	
 	//몸통에 색 입히기
 	static ConstructorHelpers::FObjectFinder<UMaterial> MageMaterial(TEXT("/Game/Feb/Object/MageBody.MageBody"));
@@ -37,6 +37,7 @@ void AMage::BeginPlay()
 	Super::BeginPlay();
 	StartLocation = GetActorLocation();
 	CurrentLocation = StartLocation;
+	ForwardVector = GetActorForwardVector();
 }
 
 void AMage::Tick(float DeltaTime)
@@ -45,9 +46,9 @@ void AMage::Tick(float DeltaTime)
 	if (FVector::Distance(StartLocation, CurrentLocation)>MaxRange)
 	{
 		MoveSpeed *= -1;
-		SetActorRotation(FRotator(0.0f, GetActorRotation().Yaw * (-1), GetActorRotation().Roll));
+		SetActorRotation(FRotator(GetActorRotation().Pitch, GetActorRotation().Yaw + 180, GetActorRotation().Roll));
 	}
-	CurrentLocation.X += MoveSpeed * DeltaTime;
+	CurrentLocation += ForwardVector * MoveSpeed * DeltaTime;
 	SetActorLocation(FVector(CurrentLocation));
 }
 
