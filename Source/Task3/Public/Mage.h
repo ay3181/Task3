@@ -16,7 +16,9 @@ public:
 
 	USceneComponent* SceneRoot;
 	USkeletalMeshComponent* MageSkeletalMeshComp;
-	UMaterial* MageMaterial;
+
+	FVector StartLocation, CurrentLocation;
+	float MoveSpeed, MaxRange;
 
 protected:
 	virtual void BeginPlay() override;
